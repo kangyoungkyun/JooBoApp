@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+ 
+<head>
+  <title>주보넷</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+  <style>
+
+
+      
+      /* 이렇게 링크해서 사용하면 됩니다 */
+      @import url('//fonts.googleapis.com/earlyaccess/nanumgothic.css');
+      
+      /* 폰트 이름은 'Nanum Gothic' 입니다. 띄어 쓰기가 있으므로 주의해 주세요. */
+      h1,h2,h3,input,td,p,div,ui,li,a,span,button {
+          font-family : 'Nanum Gothic';
+          
+      }
+  
+
+
+.col-centered{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+input {display: block !important; padding: 0 !important; margin: 0 !important; border: 0 !important; width: 100% !important; border-radius: 0 !important; line-height: 1 !important;}
+td {margin: 0 !important; padding: 0 !important;}
+
+input, th, td {
+   text-align: center;   
+}
+
+
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.loading-bar {
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  border-radius: 4px;
+  animation: loading 1s ease-in-out infinite;
+}
+.loading-bar:nth-child(1) {
+  background-color: #3498db;
+  animation-delay: 0;
+}
+.loading-bar:nth-child(2) {
+  background-color: #c0392b;
+  animation-delay: 0.09s;
+}
+.loading-bar:nth-child(3) {
+  background-color: #f1c40f;
+  animation-delay: .18s;
+}
+.loading-bar:nth-child(4) {
+  background-color: #27ae60;
+  animation-delay: .27s;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1, 2.2);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+    #myDiv {
+      display: none;
+      text-align: center;
+    }
+
+  </style>
+ 
+</head>
+ 
+<body onload="myFunction()">
+ 
+  <!-- 네비게이션 바 시작 -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                  aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">주보넷</a>
+          </div>
+  
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                  <li class="active">
+                      <a href="/">Home</a>
+                  </li>
+                  <li>
+                      <a href="/joobo.html">주보제작</a>
+                  </li>
+                  <li>
+                      <a id="joinmenu" href="/join.html">가입</a>
+                  </li>
+                  <li>
+                      <a id="loginmenu" href="/login.html">로그인</a>
+                  </li>
+ 
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<!--  인디케이터 -->
+  <div class="loading" id="loader">
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+  </div>
+
+  
+
+
+
+<div class="container">
+
+
+<br>
+
+
+
+<h1 class="text-center">예배순서</h1>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+        <div class="row text-right">
+                    <button type="button" id="addBtn" class="btn btn-primary">칸추가</button>
+                    <button type="button" id="deleteBtn" class="btn btn-danger">삭제</button>
+        </div>
+
+        <br>
+
+</div>
+
+<br>
+<br>
+
+<table class="table table-bordered table-condensed">
+        <thead>
+                <tr>
+                  <th>순서</th>  
+                  <th>제목</th>
+                  <th>내용</th>
+                  <th>인도자</th>
+                </tr>
+        </thead>
+    <tbody id="myTbody">
+
+
+
+    </tbody>
+  </table>
+
+
+</div>
+
+<br>
+<br>
+<br>
+
+        <div class="row text-center">    
+        <button type="button" id="saveBtn" class="btn btn-success btn-lg">작성완료</button>
+        </div>
+
+<br>
+<br>
+<br>
+<br>
+
+  <!--스크립트 부분. 자신의 스크립트 코드로 변경! -->
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+  <script>
+    var firebaseEmailAuth; //파이어베이스 email 인증 모듈 전역변수
+    var firebaseDatabase; //파이어베이스 db 모듈 전역변수
+    var name; //유저 교회 이름
+    var loginUserKey; //로그인한 유저의 부모 key
+    var userInfo; //로그인한 유저의 정보 object type
+
+    //파이어 베이스 초기화 코드
+    var config = {
+    apiKey: "AIzaSyA9oNOMkppw2zOBFItjcVvyZ--f1onvaOY",
+    authDomain: "thanksmemo-19012.firebaseapp.com",
+    databaseURL: "https://thanksmemo-19012.firebaseio.com",
+    projectId: "thanksmemo-19012",
+    storageBucket: "thanksmemo-19012.appspot.com",
+    messagingSenderId: "482108959359"
+  };
+    firebase.initializeApp(config);
+ 
+    firebaseEmailAuth = firebase.auth();
+    firebaseDatabase = firebase.database();
+ 
+    //세션 체크 함수
+    userSessionCheck();
+
+
+//유저가 로그인 했는지 안했는지 확인해주는 함수
+function userSessionCheck() {
+      
+      //로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+      firebaseEmailAuth.onAuthStateChanged(function (user) {
+        
+        if (user) {
+          //조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+          firebaseDatabase.ref("users/" + user.uid).once('value').then(function (snapshot) {
+            
+            //자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+            document.getElementById("loginmenu").textContent = "로그아웃";
+            document.getElementById("loginmenu").href = "/logout.html";
+            document.getElementById("joinmenu").textContent = "반가워요! " + snapshot.val().name + " 님";
+            document.getElementById("joinmenu").href = "#";
+
+            name = snapshot.val().name;   //유저 닉네임은 계속 쓸거기 때문에 전역변수로 할당
+            loginUserKey = snapshot.key;  //로그인한 유저의 key도 계속 쓸 것이기 때문에 전역변수로 할당
+            userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
+            
+            //alert(userInfo.userid);  //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
+            showJoobo();
+            return true
+          });
+
+        } else {
+               //메인 페이지로 이동
+                 alert("로그인이 필요한 서비스입니다.")
+                window.location.href = "/index.html"
+          return false
+        }
+      });
+    }
+
+        //저장버튼 클릭이벤트
+        $(document).on('click', '#saveBtn', function () {
+                saveButtonAction();
+        });
+
+
+        function saveButtonAction(){
+            //alert("저장 버튼이 눌렀습니다 - Textfiled 유효성검사 진행 + FirebaseDB연결 -> 배열데이터 Json형식으로 DB에 저장작업 예정")
+            var x = document.getElementById("myTbody").childElementCount;
+                if(x <= 0){
+                    alert("저장할 데이터가 없습니다.")
+                }else{
+
+                    var titleArray = ["title", "content" ,"people"]
+                    var dataObject = {}
+                    var dataWidthNumberObject = {}
+                    var dataResultObject = {}
+                    var pLength = document.getElementById("myTbody").children.length;     //행 개수
+                    var elementLength = document.getElementById("myTbody").children[0].childElementCount; //엘리먼트 개수4
+
+                                        //2
+                        for (var i = 0; i < pLength; i++) { 
+                                                       //4
+                                for (var ii = 1; ii < elementLength; ii++) { 
+            
+                                console.log(document.getElementById("myTbody").children[i].children[ii].childNodes[0].value); //
+                                dataObject[titleArray[ii -1]] = document.getElementById("myTbody").children[i].children[ii].childNodes[0].value;
+
+                                }
+                                dataWidthNumberObject[i+1] = dataObject
+                                dataObject = {}
+                                }
+                            }
+                 
+                        //alert(Object.keys(dataWidthNumberObject).length)
+                        console.log(dataWidthNumberObject)    
+
+                      var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey);
+
+                     jooboRef.set(dataWidthNumberObject);
+
+                     showJoobo()
+
+                     alert("성공적으로 저장 되었습니다.")
+                }
+
+
+        //칸추가버튼 클릭이벤트
+        $(document).on('click', '#addBtn', function () {
+            addButtonAction();
+        });
+
+        function addButtonAction(){
+            var x = document.getElementById("myTbody").childElementCount;
+            
+            console.log("칸추가 버튼이 눌렀습니다 " + x + "개")
+            //id='" + mod_btn_key + "'
+            var html =  "<tr>" +
+                        "<td>" + "<input id = \"num\" type=\"text\" value = '"+(x+1)+"' class=\"form-control\" readonly/>" + "</td>" + 
+                        "<td>" + "<input id = \"title\" type=\"text\" class=\"form-control\" placeholder=\"예) 성경봉독\"/>" + "</td>" + 
+                        "<td>" + "<input id = \"content\" type=\"text\" class=\"form-control\" placeholder=\"에스라1장 1절-7절\"/>" + "</td>" + 
+                        "<td>" + "<input id = \"people\" type=\"text\" class=\"form-control\" placeholder=\"홍길동 청년\"/>" + "</td>" + 
+                        "</tr>"
+
+            $("#myTbody").append(html);
+        }
+
+
+        //칸 삭제버튼 클릭이벤트
+        $(document).on('click', '#deleteBtn', function () {
+            var x = document.getElementById("myTbody").childElementCount;
+                if(x <= 0){
+                    alert("삭제할 수 있는 행이 없습니다.")
+                }else{
+                    deleteButtonAction();
+                }
+                
+        });
+
+        function deleteButtonAction(){
+            //alert("칸 삭제 버튼이 눌렀습니다")
+            var parent = document.getElementById("myTbody");
+            parent.removeChild(parent.lastChild);
+            
+        }
+
+    //주보데이터 가져오기
+    function showJoobo() {
+      //alert("showJoobo")
+      //로그인한 유저라면
+      if(loginUserKey){
+          //alert(loginUserKey)
+          
+          var parent = document.getElementById("myTbody");
+
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+
+          //글이 저장된 레퍼런스 값 가져오기
+          var jooboRef = firebaseDatabase.ref('joobo/'+loginUserKey);
+          //on 함수로 글 목록가져오기
+          jooboRef.on('child_added', on_joobo_list)
+      }else{
+        alert("실패")
+        return;
+      }
+
+    }
+
+   //주보리스트 joobo 테이블의  키 값들을 연속적으로 가져온다.
+   function on_joobo_list(data) {
+      console.log("on_joobo_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다")
+      var key = data.key;
+      var Data = data.val();
+      console.log("키:" + key, "data:" + Data.title, "content:"+Data.content,"people:"+Data.people)
+      
+      var html =  "<tr>" +
+                        "<td>" + "<input id = \"num\" type=\"text\" value = '"+(key)+"' class=\"form-control\" readonly/>" + "</td>" + 
+                        "<td>" + "<input id = \"title\" type=\"text\" class=\"form-control\" value='"+ Data.title +"'/>" + "</td>" + 
+                        "<td>" + "<input id = \"content\" type=\"text\" class=\"form-control\" value='"+ Data.content +"'/>" + "</td>" + 
+                        "<td>" + "<input id = \"people\" type=\"text\" class=\"form-control\" value='"+ Data.people +"'/>" + "</td>" + 
+                        "</tr>"
+
+            $("#myTbody").append(html);
+
+
+    }
+
+
+
+
+// console.log(joobosSample)
+// console.log(joobosSample['1'])
+// console.log(joobosSample['2'])
+// console.log(joobosSample['1']["title"],joobosSample['1']["content"],joobosSample['1']["people"])
+// console.log(joobosSample['2']["title"],joobosSample['2']["content"],joobosSample['2']["people"])
+
+
+//-------------------------------
+
+
+// var joobos = {}; // 주보 행 하나를 담을 부모 딕셔너리
+
+//  var joobo = {
+//     title: "성경봉독",
+//     content: "여호수아 20장 11절 - 12절",
+//     people: "김동수 청년"
+//   }
+  
+//   for (key in joobo) {
+//     console.log("key:" + key);
+//   }
+  
+//   for (key in joobo) {
+//     console.log(key + " - " + joobo[key]);
+//   }
+
+
+// var joobos = []; // 배열에 객체의 키 값을 모두 추가
+
+// for (key in joobo) {
+//     joobos.push(key);
+// }
+
+//console.log(joobos.length)
+
+
+
+/*
+                //input file 붙여주기 - id가 fileButton 인 filetpye의 엘리먼트를 붙여주었다.
+                var html = "<input type=\"file\" id=\"fileButton\" />";
+                $("#showfile").append(html);
+                console.log("input file 붙여주기 완료");
+
+                //기존에 한줄 메시지 없애주고, 새로운 input text 붙여주기
+                var parent = document.getElementById("statetxtP");
+                var child = document.getElementById("statetxt");
+                parent.removeChild(child);
+                console.log("한줄 메시지가 들어있는 p 태그 삭제 완료");
+
+                //한줄 메시지 적을 textarea 창 활성화
+                var newTextarea = "<textarea class=\"form-control\" rows=\"3\" id=\"comment\"></textarea>";
+                $("#statetxtP").append(newTextarea);
+
+var html = "<tr>" +
+           "<td>" + 3 + "</td>" + 
+           "<td>" + "<input id = \"title\" type=\"text\" class=\"form-control\" />" + "</td>" + 
+           "<td>" + "<input id = \"content\" type=\"text\" class=\"form-control\" />" + "</td>" + 
+           "<td>" + "<input id = \"people\" type=\"text\" class=\"form-control\" />" + "</td>" + 
+           "</tr>"
+
+
+
+
+    <tr>
+            <td>3</td>
+            <td><input id = "title" type="text" class="form-control" /></td>
+            <td><input id = "content" type="text" class="form-control" /></td>
+            <td><input id = "people" type="text" class="form-control" /></td>
+    </tr>
+
+
+
+                    var html =
+                    "<div class=\"media\">" +
+                    "<div class=\"media-body\">" +
+                    "<h4 class=\"media-heading\">" + name +
+                    " <span STYLE=\"color: green; font-size: 5pt\">" + createtime + "</span></h4>" +
+                    "<div id='" + key + "'><p>" + thankComment + "</p></div></div>" +
+                    "<div align=\"right\" id='" + mod_btn_key + "'>" +
+                    "<button type=\"button\" class=\"btn btn-warning modify\" id='" + mod_btn_key + "' onclick=\"btn_modify('" + key + "')\">수정</button>" +
+                    " " +
+                    "<button type=\"button\" class=\"btn btn-danger\" onclick=\"btn_delete('" + key + "')\">삭제</button>" +
+                    "</div></div>" +
+                    "<hr>";
+ 
+ 
+                $(".thanksList").append(html);
+
+                    console.log(document.getElementById("myTbody").children[0].nodeName) //tr
+                    console.log(document.getElementById("myTbody").children[0].children[0].nodeName) //td
+                    console.log(document.getElementById("myTbody").children[0].children[0].children[0].nodeName) //input
+
+                    // var joobosSample = {  1 : {
+                    //                 title: "성경봉독",
+                    //                 content: "여호수아 20장 11절 - 12절",
+                    //                 people: "김미애 청년"
+                    //                 },
+                    //                 2 : {
+                    //                 title: "찬양",
+                    //                 content: "주우리 아버지",
+                    //                 people: "다같이"
+                    //                 }              
+                    //             }
+                    // console.log(joobosSample)
+
+*/
+  </script>
+ 
+ <script>
+    //페이지 인디케이터 함수
+    var myVar;
+    function myFunction() {
+      myVar = setTimeout(showPage, 1500);
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+    }
+  </script>
+
+
+ 
+</body>
+</html>

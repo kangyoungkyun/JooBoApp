@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+ 
+<head>
+  <title>주보넷</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+  <style>
+
+/* 이렇게 링크해서 사용하면 됩니다 */
+@import url('//fonts.googleapis.com/earlyaccess/nanumgothic.css');
+
+/* 폰트 이름은 'Nanum Gothic' 입니다. 띄어 쓰기가 있으므로 주의해 주세요. */
+h1,h2,h3,input,td,p,div,ui,li,a,span,button {
+	font-family : 'Nanum Gothic';
+	
+}
+
+
+.col-centered{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.jumbotron {
+
+background-size: cover;}
+
+.jumbotron { min-height: 350px; }
+  </style>
+ 
+</head>
+ 
+<body>
+ 
+  <!-- 네비게이션 바 시작 -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                  aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">주보넷</a>
+          </div>
+  
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                  <li class="active">
+                      <a href="/">Home</a>
+                  </li>
+                  <li>
+                      <a href="/joobo.html">주보제작</a>
+                  </li>
+                  <li>
+                      <a id="joinmenu" href="/join.html">가입</a>
+                  </li>
+                  <li>
+                      <a id="loginmenu" href="/login.html">로그인</a>
+                  </li>
+ 
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+
+  
+<br>
+<br>
+<br>
+<br>
+ 
+  <!-- 네비게이션 바 끝 -->
+ 
+
+  <!-- 점보트론 시작 -->
+  <div class="container">
+    <div class="jumbotron">
+      <h1>
+        <span style="color:black">주보, 어떻게 만들고 계신가요?</span>
+      </h1>
+      <br>
+      <p>
+        <span style="color:black">
+        이제 주보넷에서 30초만에 만들어서 스마트폰으로 간편하게 보세요.
+        </span>
+      </p>
+      <br>
+      <br>
+      <p class="text-center"><a class="btn btn-default btn-lg" href="/joobo.html" role="button">시작하기</a></p>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <!-- 점보트론 끝 -->
+<br>
+
+<br>
+    <!-- 카드 메뉴 시작 -->
+    <div class="container">
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        
+        <div class="col-lg-4 col-centered">
+          <img class="img" src="https://cdn1.iconfinder.com/data/icons/social-media-set/24/Livejournal-128.png" alt="Generic placeholder image" width="140" height="140">
+          <h2>섬김</h2>
+          <p>주보넷은 사역자들을 위해 번거롭고, 비용부담이 컷던 주보제작을 간편하게, 언제 어디서든 제작하고 공유할 수 있는 서비스를 제공합니다.</p>
+          <p><a class="btn btn-default" href="#" role="button">자세히 &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4 col-centered">
+          <img class="img" src="https://cdn1.iconfinder.com/data/icons/social-media-set/24/Myspace-128.png" alt="Generic placeholder image" width="140" height="140">
+          <h2>나눔</h2>
+          <p>주보넷은 전국의 미자립교회가 안정적으로 성장할 수 있도록 IT기술 서비스와 재정자립을 위한 후원활동을 진행합니다.</p>
+          <p><a class="btn btn-default" href="#" role="button">자세히 &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4 col-centered">
+          <img class="img" src="https://cdn1.iconfinder.com/data/icons/social-media-set/24/Reverbnation-128.png" alt="Generic placeholder image" width="140" height="140">
+          <h2>문화</h2>
+          <p>주보넷은 크리스찬 콘텐츠 문화를 만들기 위해 한국교회와 다양한 온.오프라인 프로젝트를 기획합니다.</p>
+          <p><a class="btn btn-default" href="#" role="button">자세히 &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+</div>
+<!-- 카드 메뉴 끝-->
+<br>
+<br>
+<br>
+<!-- 소개 메뉴 시작 -->
+  <div class="container">
+  <hr class="featurette-divider">
+  <br>
+  <br>
+<br>
+<br>
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">주보넷을 이용하는 교회 <span class="text-muted"></span></h2>
+      <p class="lead">아현중앙감리교회,100주년기념교회,여의도순복음교회,사천읍교회,김포교회,제일교회,사랑의교회,믿음소망교회,우리들교회,선한목자교회,제자들교회,온맘교회,어린양교회,선한우리들교회,분당우리교회,진주교회,성남교회,제일교회,온세상교회,주님의교회,은혜로교회,길과진리교회,세상의빛교회,하나교회,생명의빛교회,수지사랑의교회,성수교회등 3,000여교회</p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-responsive center-block" src="https://png.pngtree.com/element_origin_min_pic/17/09/01/35bf263c77e586af494cfd6106b20ece.jpg" alt="Generic placeholder image">
+    </div>
+  </div>
+  <br>
+  <br>
+  <hr class="featurette-divider">
+  <br>
+  <br>
+  <div class="row featurette">
+    <div class="col-md-7 col-md-push-5">
+      <h2 class="featurette-heading">주보넷이 섬기는 교회 <span class="text-muted"></span></h2>
+      <p class="lead">미자립교회 이름...</p>
+    </div>
+    <div class="col-md-5 col-md-pull-7">
+      <img class="featurette-image img-responsive center-block" src="data:image/png;base64,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" alt="Generic placeholder image">
+    </div>
+  </div>
+  <br>
+  <br>
+  <hr class="featurette-divider">
+  <br>
+  <br>
+  <div class="row featurette">
+    <div class="col-md-7">
+      <h2 class="featurette-heading">공지사항<span class="text-muted"></span></h2>
+      <p class="lead">1.주보넷 홈페이지가 오픈되었습니다.<br>
+                      2.삼십인 미만 미자립교회를 알려주세요.<br>
+                      3.협력문의 : abcnt@naver.com
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img class="featurette-image img-responsive center-block" src="https://www.shareicon.net/data/512x512/2017/01/23/874902_email_512x512.png" alt="Generic placeholder image">
+    </div>
+  </div>
+  <br>
+  <br>
+<br>
+<br>
+  <hr class="featurette-divider">
+</div>
+ <!-- 소개 메뉴 끝 -->
+
+<br>
+<br>
+<br>
+<br>
+ <div class="container">
+       <!-- FOOTER -->
+       <footer>
+        <p class="pull-right"><a href="#">맨위로</a></p>
+        <p>&copy; 2018 주보넷 Corp. </p>
+      </footer>
+</div>
+
+
+  <!--스크립트 부분. 자신의 스크립트 코드로 변경! -->
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+  <script>
+    var firebaseEmailAuth; //파이어베이스 email 인증 모듈 전역변수
+    var firebaseDatabase; //파이어베이스 db 모듈 전역변수
+    var name; //유저 교회 이름
+    var loginUserKey; //로그인한 유저의 부모 key
+    var userInfo; //로그인한 유저의 정보 object type
+
+    //파이어 베이스 초기화 코드
+    var config = {
+    apiKey: "AIzaSyA9oNOMkppw2zOBFItjcVvyZ--f1onvaOY",
+    authDomain: "thanksmemo-19012.firebaseapp.com",
+    databaseURL: "https://thanksmemo-19012.firebaseio.com",
+    projectId: "thanksmemo-19012",
+    storageBucket: "thanksmemo-19012.appspot.com",
+    messagingSenderId: "482108959359"
+  };
+    firebase.initializeApp(config);
+ 
+    firebaseEmailAuth = firebase.auth();
+    firebaseDatabase = firebase.database();
+ 
+    //세션 체크 함수
+    userSessionCheck();
+
+
+//유저가 로그인 했는지 안했는지 확인해주는 함수
+function userSessionCheck() {
+      
+      //로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+      firebaseEmailAuth.onAuthStateChanged(function (user) {
+        
+        if (user) {
+          //조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+          firebaseDatabase.ref("users/" + user.uid).once('value').then(function (snapshot) {
+            
+            //자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+            document.getElementById("loginmenu").textContent = "로그아웃";
+            document.getElementById("loginmenu").href = "/logout.html";
+            document.getElementById("joinmenu").textContent = "반가워요! " + snapshot.val().name + " 님";
+            document.getElementById("joinmenu").href = "#";
+
+            name = snapshot.val().name;   //유저 닉네임은 계속 쓸거기 때문에 전역변수로 할당
+            loginUserKey = snapshot.key;  //로그인한 유저의 key도 계속 쓸 것이기 때문에 전역변수로 할당
+            userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
+            
+            //alert(userInfo.userid);  //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
+            
+            return true
+          });
+
+        } else {
+               // $('#comment').val("");
+          return false
+        }
+      });
+    }
+
+
+  </script>
+ 
+
+ 
+</body>
+ 
+</html>
