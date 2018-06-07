@@ -196,7 +196,7 @@ $('.input-group.date').datepicker({
     <div class="col-sm-3">
       
       <div class="input-group date">
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="selectDate">
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
@@ -248,6 +248,14 @@ $('.input-group.date').datepicker({
 <br>
 <br>
 
+
+        <div class="row text-center">    
+        <button type="button" id="saveBtn" class="btn btn-info btn">예배순서저장</button>
+        </div>
+
+        <br>
+        <br>
+
 <div class="container">
 
     <div class="row">
@@ -271,20 +279,15 @@ $('.input-group.date').datepicker({
             </form>
         </div>
     </div>
-
-
+    <br>
+    <br>
+    <br>
+    <div class="row text-center">    
+      <button type="button" id="saveBtn2" class="btn btn-success btn">광고내용저장</button>
+      </div>
 </div>
 
 
-
-
-<br>
-<br>
-<br>
-
-        <div class="row text-center">    
-        <button type="button" id="saveBtn" class="btn btn-success btn-lg">작성완료</button>
-        </div>
 
 <br>
 <br>
@@ -326,7 +329,7 @@ function userSessionCheck() {
         
         if (user) {
           //조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
-          firebaseDatabase.ref("users/" + user.uid).once('value').then(function (snapshot) {
+          firebaseDatabase.ref("admin/" + user.uid).once('value').then(function (snapshot) {
             
             //자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
             document.getElementById("loginmenu").textContent = "로그아웃";
@@ -352,7 +355,7 @@ function userSessionCheck() {
       });
     }
 
-        //저장버튼 클릭이벤트
+        //예배 순서 저장버튼 클릭이벤트
         $(document).on('click', '#saveBtn', function () {
                 saveButtonAction();
         });
@@ -389,7 +392,7 @@ function userSessionCheck() {
                         //alert(Object.keys(dataWidthNumberObject).length)
                         console.log(dataWidthNumberObject)    
 
-                      var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey);
+                      var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey+ '/one');
 
                      jooboRef.set(dataWidthNumberObject);
 
@@ -438,6 +441,38 @@ function userSessionCheck() {
             
         }
 
+
+        //광고내용 저장버튼 클릭이벤트
+        $(document).on('click', '#saveBtn2', function () {
+                saveButtonAction2();
+        });
+
+        //광고내용 저장 이벤트
+         function saveButtonAction2() {
+          var date = document.getElementById("selectDate").value
+          var comment = document.getElementById("comment").value
+          var pray = document.getElementById("pray").value
+
+           if(date === ""){
+            alert("날짜를 선택해 주세요");
+            return
+           }
+
+              var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey+ '/zero');
+              jooboRef.set({"date":date});
+
+
+              var jooboComentRef = firebaseDatabase.ref("joobo/" + loginUserKey+ '/two');
+              jooboComentRef.set({"comment":comment,
+                                  "pray" : pray});
+
+            
+          alert("성공적으로 저장 되었습니다.");
+            
+            
+
+         }
+
     //주보데이터 가져오기
     function showJoobo() {
       //alert("showJoobo")
@@ -452,15 +487,35 @@ function userSessionCheck() {
         }
 
           //글이 저장된 레퍼런스 값 가져오기
-          var jooboRef = firebaseDatabase.ref('joobo/'+loginUserKey);
+          var jooboRef = firebaseDatabase.ref('joobo/'+loginUserKey + '/one');
           //on 함수로 글 목록가져오기
           jooboRef.on('child_added', on_joobo_list)
+
+          
+          //날짜가 저장된 레퍼런스 값 가져오기
+          var jooboDateRef = firebaseDatabase.ref('joobo/'+loginUserKey + '/zero');
+          //on 함수로 글 목록가져오기
+          jooboDateRef.on('child_added', on_joobo_date)
+
+
+          //광고, 기도내용이 저장된 레퍼런스 값 가져오기
+          var jooboComentRef = firebaseDatabase.ref('joobo/'+loginUserKey + '/two');
+          //on 함수로 글 목록가져오기
+          jooboComentRef.on('child_added', on_joobo_comment)
+
       }else{
         alert("실패")
         return;
       }
 
     }
+
+    //주보 날짜 조회
+    function on_joobo_date(data) {
+      var Data = data.val();
+      document.getElementById("selectDate").value = Data
+    }
+
 
    //주보리스트 joobo 테이블의  키 값들을 연속적으로 가져온다.
    function on_joobo_list(data) {
@@ -481,115 +536,19 @@ function userSessionCheck() {
 
     }
 
+    //주보 광고내용, 기도제목 조회
+    function on_joobo_comment(data) {
+      var key = data.key;
+      var Data = data.val();
 
+      if(key === "comment"){
+        document.getElementById("comment").value = data.val()
+      }else if(key === "pray"){
+        document.getElementById("pray").value = data.val()
+      }
 
+    }
 
-// console.log(joobosSample)
-// console.log(joobosSample['1'])
-// console.log(joobosSample['2'])
-// console.log(joobosSample['1']["title"],joobosSample['1']["content"],joobosSample['1']["people"])
-// console.log(joobosSample['2']["title"],joobosSample['2']["content"],joobosSample['2']["people"])
-
-
-//-------------------------------
-
-
-// var joobos = {}; // 주보 행 하나를 담을 부모 딕셔너리
-
-//  var joobo = {
-//     title: "성경봉독",
-//     content: "여호수아 20장 11절 - 12절",
-//     people: "김동수 청년"
-//   }
-  
-//   for (key in joobo) {
-//     console.log("key:" + key);
-//   }
-  
-//   for (key in joobo) {
-//     console.log(key + " - " + joobo[key]);
-//   }
-
-
-// var joobos = []; // 배열에 객체의 키 값을 모두 추가
-
-// for (key in joobo) {
-//     joobos.push(key);
-// }
-
-//console.log(joobos.length)
-
-
-
-/*
-                //input file 붙여주기 - id가 fileButton 인 filetpye의 엘리먼트를 붙여주었다.
-                var html = "<input type=\"file\" id=\"fileButton\" />";
-                $("#showfile").append(html);
-                console.log("input file 붙여주기 완료");
-
-                //기존에 한줄 메시지 없애주고, 새로운 input text 붙여주기
-                var parent = document.getElementById("statetxtP");
-                var child = document.getElementById("statetxt");
-                parent.removeChild(child);
-                console.log("한줄 메시지가 들어있는 p 태그 삭제 완료");
-
-                //한줄 메시지 적을 textarea 창 활성화
-                var newTextarea = "<textarea class=\"form-control\" rows=\"3\" id=\"comment\"></textarea>";
-                $("#statetxtP").append(newTextarea);
-
-var html = "<tr>" +
-           "<td>" + 3 + "</td>" + 
-           "<td>" + "<input id = \"title\" type=\"text\" class=\"form-control\" />" + "</td>" + 
-           "<td>" + "<input id = \"content\" type=\"text\" class=\"form-control\" />" + "</td>" + 
-           "<td>" + "<input id = \"people\" type=\"text\" class=\"form-control\" />" + "</td>" + 
-           "</tr>"
-
-
-
-
-    <tr>
-            <td>3</td>
-            <td><input id = "title" type="text" class="form-control" /></td>
-            <td><input id = "content" type="text" class="form-control" /></td>
-            <td><input id = "people" type="text" class="form-control" /></td>
-    </tr>
-
-
-
-                    var html =
-                    "<div class=\"media\">" +
-                    "<div class=\"media-body\">" +
-                    "<h4 class=\"media-heading\">" + name +
-                    " <span STYLE=\"color: green; font-size: 5pt\">" + createtime + "</span></h4>" +
-                    "<div id='" + key + "'><p>" + thankComment + "</p></div></div>" +
-                    "<div align=\"right\" id='" + mod_btn_key + "'>" +
-                    "<button type=\"button\" class=\"btn btn-warning modify\" id='" + mod_btn_key + "' onclick=\"btn_modify('" + key + "')\">수정</button>" +
-                    " " +
-                    "<button type=\"button\" class=\"btn btn-danger\" onclick=\"btn_delete('" + key + "')\">삭제</button>" +
-                    "</div></div>" +
-                    "<hr>";
- 
- 
-                $(".thanksList").append(html);
-
-                    console.log(document.getElementById("myTbody").children[0].nodeName) //tr
-                    console.log(document.getElementById("myTbody").children[0].children[0].nodeName) //td
-                    console.log(document.getElementById("myTbody").children[0].children[0].children[0].nodeName) //input
-
-                    // var joobosSample = {  1 : {
-                    //                 title: "성경봉독",
-                    //                 content: "여호수아 20장 11절 - 12절",
-                    //                 people: "김미애 청년"
-                    //                 },
-                    //                 2 : {
-                    //                 title: "찬양",
-                    //                 content: "주우리 아버지",
-                    //                 people: "다같이"
-                    //                 }              
-                    //             }
-                    // console.log(joobosSample)
-
-*/
   </script>
  
  <script>
