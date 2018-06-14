@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>주보넷 - 로그인</title>
+  <title>주보사랑 - 로그인</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -34,7 +34,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">로그인</a>
+              <a class="navbar-brand" href="/">주보사랑</a>
           </div>
   
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,12 +46,12 @@
                   <li>
                     <a href="/joobo.html">주보제작</a>
                   </li>
-                  <li>
-                      <a id="joinmenu" href="/join.html">가입</a>
-                  </li>
                   <li class="active">
-                      <a id="loginmenu" href="/login.html">로그인</a>
+                        <a id="loginmenu" href="#">로그인</a>  
                   </li>
+                  <li>
+                    <a id="joinmenu" href="#"></a>
+                 </li>
  
               </ul>
           </div>
@@ -140,13 +140,9 @@
     function loginSuccess(firebaseUser){
        alert("로그인 성공");
  
-    //로그인 성공한 유저 id 확인해 보기 - firebase database에 접근해서 데이터 조회 하는 함수
-   firebaseDatabase.ref("admin/"+firebaseUser.uid).once('value').then(function(snapshot){
-        //alert(snapshot.val().name)
-    });
  
     //메인 페이지로 이동
-    window.location.href = "/index.html"
+    window.location.href = "/"
     }
  
     

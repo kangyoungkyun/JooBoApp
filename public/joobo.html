@@ -2,7 +2,7 @@
 <html lang="ko">
  
 <head>
-  <title>주보넷</title>
+  <title>주보사랑 - 제작</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,30 +18,53 @@
 
 
   <style>
-
-      
       /* 이렇게 링크해서 사용하면 됩니다 */
+
       @import url('//fonts.googleapis.com/earlyaccess/nanumgothic.css');
       
       /* 폰트 이름은 'Nanum Gothic' 입니다. 띄어 쓰기가 있으므로 주의해 주세요. */
-      h1,h2,h3,input,td,p,div,ui,li,a,span,button {
-          font-family : 'Nanum Gothic';
           
+    h1,
+    h2,
+    h3,
+    input,
+    td,
+    p,
+    div,
+    ui,
+    li,
+    a,
+    span,
+    button {
+      font-family: 'Nanum Gothic';
+
       }
   
-
-
-.col-centered{
+    .col-centered {
   display: block;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-input {display: block !important; padding: 0 !important; margin: 0 !important; border: 0 !important; width: 100% !important; border-radius: 0 !important; line-height: 1 !important;}
-td {margin: 0 !important; padding: 0 !important;}
+    input {
+      display: block !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 0 !important;
+      width: 100% !important;
+      border-radius: 0 !important;
+      line-height: 1 !important;
+    }
 
-input, th, td {
+    td {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    input,
+    th,
+    td {
    text-align: center;   
 }
 
@@ -52,6 +75,7 @@ input, th, td {
   top: 50%;
   left: 50%;
 }
+
 .loading-bar {
   display: inline-block;
   width: 4px;
@@ -59,18 +83,22 @@ input, th, td {
   border-radius: 4px;
   animation: loading 1s ease-in-out infinite;
 }
+
 .loading-bar:nth-child(1) {
   background-color: #3498db;
   animation-delay: 0;
 }
+
 .loading-bar:nth-child(2) {
   background-color: #c0392b;
   animation-delay: 0.09s;
 }
+
 .loading-bar:nth-child(3) {
   background-color: #f1c40f;
   animation-delay: .18s;
 }
+
 .loading-bar:nth-child(4) {
   background-color: #27ae60;
   animation-delay: .27s;
@@ -92,13 +120,12 @@ input, th, td {
       display: none;
       text-align: center;
     }
-
   </style>
  
  <script type='text/javascript'>
 
   //달력
-    (function($){
+    (function ($) {
 	$.fn.datepicker.dates['kr'] = {
 		days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
 		daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
@@ -108,7 +135,7 @@ input, th, td {
 	};
 }(jQuery));
 
-$(function(){
+    $(function () {
 
 $('.input-group.date').datepicker({
 
@@ -143,7 +170,7 @@ $('.input-group.date').datepicker({
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">주보넷</a>
+        <a class="navbar-brand" href="/">주보사랑</a>
           </div>
   
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -156,10 +183,10 @@ $('.input-group.date').datepicker({
                       <a href="/joobo.html">주보제작</a>
                   </li>
                   <li>
-                      <a id="joinmenu" href="/join.html">가입</a>
+                    <a id="loginmenu" href="/login.html">로그인</a>
                   </li>
                   <li>
-                      <a id="loginmenu" href="/login.html">로그인</a>
+                  <a id="joinmenu" href="#"></a>
                   </li>
  
               </ul>
@@ -255,11 +282,20 @@ $('.input-group.date').datepicker({
 
         <br>
         <br>
-
+  <br>
+  <hr>
+  <br>
+  <br>
+  <br>
+  <h1 class="text-center">공지사항</h1>
+  <br>
+  <br>
+  <br>
 <div class="container">
 
     <div class="row">
-        <div class="col-md-6">    
+
+      <div class="col-md-4">
           <h4>○광고사항</h4>
           <form>
             <div class="form-group">
@@ -269,7 +305,7 @@ $('.input-group.date').datepicker({
           </form>
         </div>
           
-        <div class="col-md-6">
+      <div class="col-md-4">
             <h4>○중보기도</h4>
             <form>
               <div class="form-group">
@@ -278,21 +314,93 @@ $('.input-group.date').datepicker({
               </div>
             </form>
         </div>
+
+      <div class="col-md-4">
+        <h4>○새가족 소개</h4>
+        <form>
+          <div class="form-group">
+
+            <textarea class="form-control" rows="5" id="new" placeholder="1. 이성수 청년(29)"></textarea>
+    </div>
+        </form>
+      </div>
     </div>
     <br>
     <br>
     <br>
     <div class="row text-center">    
-      <button type="button" id="saveBtn2" class="btn btn-success btn">광고내용저장</button>
+      <button type="button" id="saveBtn2" class="btn btn-success btn">공지사항저장</button>
       </div>
 </div>
 
+  <br>
+  <br>
+  <br>
+  <hr>
+
+  <div class="container">
+    <div id="bibleContent">
+    </div>
+    <div id="bibleButton" class="row text-center">
+
+    </div>
+  </div>
+
+<br>
+<br>
+<br>
+  <h1 class="text-center">설교본문</h1>
+<br>
+  <br>
+  <br>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">성경본문</span>
+          <input type="text" id="maintext" name="maintext" class="form-control" placeholder="창세기" aria-describedby="sizing-addon1">
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">장</span>
+          <input type="text" id="jang" name="jang" class="form-control" placeholder="1" aria-describedby="sizing-addon1">
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">시작절</span>
+          <input type="text" id="jeol" name="jeol" class="form-control" placeholder="1" aria-describedby="sizing-addon1">
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">마지막절</span>
+          <input type="text" id="jeol2" name="jeol2" class="form-control" placeholder="1" aria-describedby="sizing-addon1">
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <div class="row text-center">
+      <button type="button" id="saveBtn4" class="btn btn-default btn-md">미리보기</button>
+    </div>
+  </div>
 
 
-<br>
-<br>
-<br>
-<br>
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+
 
   <!--스크립트 부분. 자신의 스크립트 코드로 변경! -->
   <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
@@ -349,7 +457,7 @@ function userSessionCheck() {
         } else {
                //메인 페이지로 이동
                  alert("로그인이 필요한 서비스입니다.")
-                window.location.href = "/index.html"
+                window.location.href = "/"
           return false
         }
       });
@@ -361,14 +469,14 @@ function userSessionCheck() {
         });
 
 
-        function saveButtonAction(){
+    function saveButtonAction() {
             //alert("저장 버튼이 눌렀습니다 - Textfiled 유효성검사 진행 + FirebaseDB연결 -> 배열데이터 Json형식으로 DB에 저장작업 예정")
             var x = document.getElementById("myTbody").childElementCount;
-                if(x <= 0){
+      if (x <= 0) {
                     alert("저장할 데이터가 없습니다.")
-                }else{
+      } else {
 
-                    var titleArray = ["title", "content" ,"people"]
+        var titleArray = ["title", "content", "people"]
                     var dataObject = {}
                     var dataWidthNumberObject = {}
                     var dataResultObject = {}
@@ -381,10 +489,10 @@ function userSessionCheck() {
                                 for (var ii = 1; ii < elementLength; ii++) { 
             
                                 console.log(document.getElementById("myTbody").children[i].children[ii].childNodes[0].value); //
-                                dataObject[titleArray[ii -1]] = document.getElementById("myTbody").children[i].children[ii].childNodes[0].value;
+            dataObject[titleArray[ii - 1]] = document.getElementById("myTbody").children[i].children[ii].childNodes[0].value;
 
                                 }
-                                dataWidthNumberObject[i+1] = dataObject
+          dataWidthNumberObject[i + 1] = dataObject
                                 dataObject = {}
                                 }
                             }
@@ -392,7 +500,7 @@ function userSessionCheck() {
                         //alert(Object.keys(dataWidthNumberObject).length)
                         console.log(dataWidthNumberObject)    
 
-                      var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey+ '/one');
+      var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey + '/one');
 
                      jooboRef.set(dataWidthNumberObject);
 
@@ -407,13 +515,13 @@ function userSessionCheck() {
             addButtonAction();
         });
 
-        function addButtonAction(){
+    function addButtonAction() {
             var x = document.getElementById("myTbody").childElementCount;
             
             console.log("칸추가 버튼이 눌렀습니다 " + x + "개")
             //id='" + mod_btn_key + "'
-            var html =  "<tr>" +
-                        "<td>" + "<input id = \"num\" type=\"text\" value = '"+(x+1)+"' class=\"form-control\" readonly/>" + "</td>" + 
+      var html = "<tr>" +
+        "<td>" + "<input id = \"num\" type=\"text\" value = '" + (x + 1) + "' class=\"form-control\" readonly/>" + "</td>" +
                         "<td>" + "<input id = \"title\" type=\"text\" class=\"form-control\" placeholder=\"예) 성경봉독\"/>" + "</td>" + 
                         "<td>" + "<input id = \"content\" type=\"text\" class=\"form-control\" placeholder=\"에스라1장 1절-7절\"/>" + "</td>" + 
                         "<td>" + "<input id = \"people\" type=\"text\" class=\"form-control\" placeholder=\"홍길동 청년\"/>" + "</td>" + 
@@ -426,15 +534,15 @@ function userSessionCheck() {
         //칸 삭제버튼 클릭이벤트
         $(document).on('click', '#deleteBtn', function () {
             var x = document.getElementById("myTbody").childElementCount;
-                if(x <= 0){
+      if (x <= 0) {
                     alert("삭제할 수 있는 행이 없습니다.")
-                }else{
+      } else {
                     deleteButtonAction();
                 }
                 
         });
 
-        function deleteButtonAction(){
+    function deleteButtonAction() {
             //alert("칸 삭제 버튼이 눌렀습니다")
             var parent = document.getElementById("myTbody");
             parent.removeChild(parent.lastChild);
@@ -452,32 +560,166 @@ function userSessionCheck() {
           var date = document.getElementById("selectDate").value
           var comment = document.getElementById("comment").value
           var pray = document.getElementById("pray").value
+      var newperson = document.getElementById("new").value
 
-           if(date === ""){
+      if (date === "") {
             alert("날짜를 선택해 주세요");
             return
            }
 
-              var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey+ '/zero');
-              jooboRef.set({"date":date});
+      var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey + '/zero');
+      jooboRef.set({ "date": date });
 
 
-              var jooboComentRef = firebaseDatabase.ref("joobo/" + loginUserKey+ '/two');
-              jooboComentRef.set({"comment":comment,
-                                  "pray" : pray});
+      var jooboComentRef = firebaseDatabase.ref("joobo/" + loginUserKey + '/two');
+      jooboComentRef.set({
+        "comment": comment,
+        "pray": pray,
+        "newperson": newperson
+      });
+
+
+      alert("성공적으로 저장 되었습니다.");
+
+    }
+
+
+    //설교본문 저장
+    $(document).on('click', '#saveBtn3', function () {
+      saveButtonAction3();
+    });
+
+    //설교 본문 저장 이벤트
+    function saveButtonAction3() {
+      var bibleContent = document.getElementById("bibleContent")
+      var bibleButton = document.getElementById("bibleButton")
+
+      var maintext = document.getElementById("maintext").value
+      var jang = document.getElementById("jang").value
+      var jeol = document.getElementById("jeol").value
+      var jeol2 = document.getElementById("jeol2").value
+
+      var check = confirm("위의 구절이 맞습니까?");
+
+      if (check) {
+        var jooboBibleRef = firebaseDatabase.ref("joobo/" + loginUserKey + '/bible');
+        jooboBibleRef.set({
+          "maintext": maintext,
+          "jang": jang,
+          "jeol": jeol,
+          "jeol2": jeol2
+        });
 
             
           alert("성공적으로 저장 되었습니다.");
             
             
+        //dom 삭제
+        if (bibleContent.childElementCount > 0) {
+
+          while (bibleContent.firstChild) {
+            bibleContent.removeChild(bibleContent.firstChild);
+          }
+
+          while (bibleButton.firstChild) {
+            bibleButton.removeChild(bibleButton.firstChild);
+          }
+
+        }
+      }
+
+
+
+    }
+
+    //설교본문 미리보기
+    $(document).on('click', '#saveBtn4', function () {
+      saveButtonAction4();
+    });
+
+
+    //설교 본문 저장 이벤트
+    function saveButtonAction4() {
+
+      var maintext = document.getElementById("maintext").value
+      var jang = document.getElementById("jang").value
+      var jeol = document.getElementById("jeol").value
+      var jeol2 = document.getElementById("jeol2").value
+      var bibleContent = document.getElementById("bibleContent")
+      var bibleButton = document.getElementById("bibleButton")
+      $.ajax({
+        headers: { "Accept": "application/json" },
+        type: 'POST',
+        data: {
+          maintext: maintext,
+          jang: jang,
+          jeol: jeol,
+          jeol2: jeol2
+        },
+        url: 'https://polar-reef-71177.herokuapp.com/bible_search_json',
+        crossDomain: true,
+        beforeSend: function (xhr) {
+          xhr.withCredentials = true;
+        },
+        success: function (data, textStatus, request) {
+
+
+          if (bibleContent.childElementCount > 0) {
+
+            while (bibleContent.firstChild) {
+              bibleContent.removeChild(bibleContent.firstChild);
+            }
+
+            while (bibleButton.firstChild) {
+              bibleButton.removeChild(bibleButton.firstChild);
+            }
+
+          }
+
+          data.forEach(function (element, i) {
+
+            var html = "<ul class = \"list-group\">" +
+
+              "<li class=\"list-group-item\" >" + element["verse"] + "." + element["content"] + "</li>" +
+
+              "</ul>"
+
+            $("#bibleContent").append(html);
+
+          });
+
+          var html2 = "<button type=\"button\" id=\"saveBtn3\" class=\"text-center btn btn-warning\">설교본문저장</button>"
+
+          $("#bibleButton").append(html2);
+        }
+      });
+
+
+
+      //   alert(maintext);
+      //   alert(jang);
+      //   alert(jeol);
+      //   alert(jeol2);
+      //   var jooboRef = firebaseDatabase.ref("joobo/" + loginUserKey + '/zero');
+      //   jooboRef.set({ "date": date });
+
+      //   var jooboComentRef = firebaseDatabase.ref("joobo/" + loginUserKey + '/two');
+      //   jooboComentRef.set({
+      //     "comment": comment,
+      //     "pray": pray,
+      //     "newperson": newperson
+      //   });
+      //  alert("성공적으로 저장 되었습니다.");
 
          }
+
+
 
     //주보데이터 가져오기
     function showJoobo() {
       //alert("showJoobo")
       //로그인한 유저라면
-      if(loginUserKey){
+      if (loginUserKey) {
           //alert(loginUserKey)
           
           var parent = document.getElementById("myTbody");
@@ -487,23 +729,23 @@ function userSessionCheck() {
         }
 
           //글이 저장된 레퍼런스 값 가져오기
-          var jooboRef = firebaseDatabase.ref('joobo/'+loginUserKey + '/one');
+        var jooboRef = firebaseDatabase.ref('joobo/' + loginUserKey + '/one');
           //on 함수로 글 목록가져오기
           jooboRef.on('child_added', on_joobo_list)
 
           
           //날짜가 저장된 레퍼런스 값 가져오기
-          var jooboDateRef = firebaseDatabase.ref('joobo/'+loginUserKey + '/zero');
+        var jooboDateRef = firebaseDatabase.ref('joobo/' + loginUserKey + '/zero');
           //on 함수로 글 목록가져오기
           jooboDateRef.on('child_added', on_joobo_date)
 
 
           //광고, 기도내용이 저장된 레퍼런스 값 가져오기
-          var jooboComentRef = firebaseDatabase.ref('joobo/'+loginUserKey + '/two');
+        var jooboComentRef = firebaseDatabase.ref('joobo/' + loginUserKey + '/two');
           //on 함수로 글 목록가져오기
           jooboComentRef.on('child_added', on_joobo_comment)
 
-      }else{
+      } else {
         alert("실패")
         return;
       }
@@ -522,13 +764,13 @@ function userSessionCheck() {
       console.log("on_joobo_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다")
       var key = data.key;
       var Data = data.val();
-      console.log("키:" + key, "data:" + Data.title, "content:"+Data.content,"people:"+Data.people)
+      console.log("키:" + key, "data:" + Data.title, "content:" + Data.content, "people:" + Data.people)
       
-      var html =  "<tr>" +
-                        "<td>" + "<input id = \"num\" type=\"text\" value = '"+(key)+"' class=\"form-control\" readonly/>" + "</td>" + 
-                        "<td>" + "<input id = \"title\" type=\"text\" class=\"form-control\" value='"+ Data.title +"'/>" + "</td>" + 
-                        "<td>" + "<input id = \"content\" type=\"text\" class=\"form-control\" value='"+ Data.content +"'/>" + "</td>" + 
-                        "<td>" + "<input id = \"people\" type=\"text\" class=\"form-control\" value='"+ Data.people +"'/>" + "</td>" + 
+      var html = "<tr>" +
+        "<td>" + "<input id = \"num\" type=\"text\" value = '" + (key) + "' class=\"form-control\" readonly/>" + "</td>" +
+        "<td>" + "<input id = \"title\" type=\"text\" class=\"form-control\" value='" + Data.title + "'/>" + "</td>" +
+        "<td>" + "<input id = \"content\" type=\"text\" class=\"form-control\" value='" + Data.content + "'/>" + "</td>" +
+        "<td>" + "<input id = \"people\" type=\"text\" class=\"form-control\" value='" + Data.people + "'/>" + "</td>" +
                         "</tr>"
 
             $("#myTbody").append(html);
@@ -541,10 +783,12 @@ function userSessionCheck() {
       var key = data.key;
       var Data = data.val();
 
-      if(key === "comment"){
+      if (key === "comment") {
         document.getElementById("comment").value = data.val()
-      }else if(key === "pray"){
+      } else if (key === "pray") {
         document.getElementById("pray").value = data.val()
+      } else if (key === "newperson") {
+        document.getElementById("new").value = data.val()
       }
 
     }
@@ -567,4 +811,5 @@ function userSessionCheck() {
 
  
 </body>
+
 </html>
